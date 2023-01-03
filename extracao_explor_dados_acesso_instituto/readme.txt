@@ -1,0 +1,1 @@
+Extração de dados via SQL e exploração e analise dos dados via Python.
