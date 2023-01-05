@@ -23,7 +23,8 @@ select
     g.ds_setor,
     d.nm_pais,
     c.sg_estado,
-    e.ds_municipio
+    e.ds_municipio,
+    b.nr_seq_cor_pele
 from acompanhante a
     inner join pessoa b
         on a.cd_pessoa_fisica = b.cd_pessoa_fisica
@@ -69,7 +70,8 @@ select
     f.ds_setor,
     d.nm_pais,
     c.sg_estado,
-    e.ds_municipio
+    e.ds_municipio,
+    b.nr_seq_cor_pele
 from visita a
     inner join pessoa b
         on a.cd_pessoa_fisica = b.cd_pessoa_fisica
