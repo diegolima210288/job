@@ -13,7 +13,7 @@ is
 
 begin
 
-    insert into tab_log_erro_seq
+    insert into tab_log_erro
     (ds_objeto,
     nr_seq_acesso, 
     nr_seq_regra,
@@ -40,7 +40,7 @@ select
     vw.nr_sequencia
 from view_acesso_cadastro vw
 where vw.dt_acesso between p_dt_inicio and p_dt_fim
---eliminando acessos j· registrados como caso ou histÛrico
+--eliminando acessos j√° registrados como caso ou hist√≥rico
     and not exists (select 1
                     from tab_registro reg
                     where vw.nr_sequencia = reg.nr_seq_acesso);
@@ -131,13 +131,13 @@ begin
             
             end;
             
-        --SE A LINHA FOR FILTRADA PELA REGRA, VALIDAMOS SE A LINHA SER¡ DESCARTADA PELA VALIDA«√O DAS EXCE«’ES DA REGRA
+        --SE A LINHA FOR FILTRADA PELA REGRA, VALIDAMOS SE A LINHA SER√Å DESCARTADA PELA VALIDA√á√ÉO DAS EXCE√á√ïES DA REGRA
             if v_teste_regra > 0 then
             
                 v_teste_excecao := 0;
                 v_teste_excecao2 := 0;
             
-            --VALIDANDO A LINHA FILTRADA PELA REGRA NAS EXCE«’ES DA REGRA 
+            --VALIDANDO A LINHA FILTRADA PELA REGRA NAS EXCE√á√ïES DA REGRA 
                 open c_excecao;
                 loop
                     fetch c_excecao into w_c_excecao;
@@ -172,7 +172,7 @@ begin
                     
                     end;
 
-                --se o acesso for descartado por uma exceÁ„o, ent„o ser· registrado como histÛrico
+                --se o acesso for descartado por uma exce√ß√£o, ent√£o ser√° registrado como hist√≥rico
                     if v_teste_excecao = 0 then
                     
                         v_teste_excecao2 := v_teste_excecao2 + 1;
@@ -207,7 +207,7 @@ begin
                 end loop;
                 close c_excecao;
            
-            --se o acesso n„o for descartado por nenhum exceÁ„o, ent„o ser· registrado como casos
+            --se o acesso n√£o for descartado por nenhum exce√ß√£o, ent√£o ser√° registrado como casos
                 if v_teste_excecao2 = 0 then
                 
                     v_tempo_acesso := obter_dif_data(w_c_view.dt_acesso, sysdate, 'TM');
@@ -341,10 +341,10 @@ begin
     where regras.ie_situacao = 'A'
     order by regras.nr_sequencia;
 
-    --#STEP 1: identificaÁ„o de novos casos
+    --#STEP 1: identifica√ß√£o de novos casos
     identificacao_novos_casos((sysdate - v_temp_min_parametro/60/24), sysdate);
 
-    --#STEP 2: solicitaÁ„o justificativa
+    --#STEP 2: solicita√ß√£o justificativa
     solicitacao_justif_acesso;
 
 end;
